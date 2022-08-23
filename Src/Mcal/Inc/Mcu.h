@@ -1,35 +1,30 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  IntCtrl_Cfg.h
+ *         File:  <Write File Name>
  *       Module:  -
  *
- *  Description:  <Write File DESCRIPTION here>     
- *  
+ *  Description:  <Write File DESCRIPTION here>
+ *
  *********************************************************************************************************************/
-#ifndef INTCTRL_CFG_H
-#define INTCTRL_CFG_H
+#ifndef MCU_H
+#define MCU_H
 
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
+#include "Std_Types.h"
+#include "Mcu_Types.h"
+#include "Mcu_Lcfg.h"
+#include "Mcu_cfg.h"
+
 
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
-#define ENABLE_GLOBAL_INTERRUPT				1
 
-/*"You can choose a number from 1, 2, 4, and 8"... 1 --> 1 GP_PRI and 8 SubGP_PRI, 2 --> 2 GP_PRI and 4 SubGP_PRI, 4 --> 4 GP_PRI and 2 SubGP_PRI, 8 --> 8 GP_PRI and 1 SubGP_PRI */
-/*X --> Group and Y --> SubGroup*/
-#define NUM_OF_GROUP_PRI_YYY					1		
-#define NUM_OF_GROUP_PRI_XYY					2		
-#define NUM_OF_GROUP_PRI_XXY					4		
-#define NUM_OF_GROUP_PRI_XXX					8
-#define NUM_OF_GROUP_PRI_SELECTOR			NUM_OF_GROUP_PRI_XXY	
 
-/*number of programmable exceptions from 1 to 85: 7 system exceptions and faults, 78 peripherals interrupts*/
-#define NUM_OF_ACTIVE_INTERRUPT 		6 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
@@ -40,9 +35,23 @@
  *********************************************************************************************************************/
 
 
- 
-#endif  /* INTCTRL_CFG_H */
+/**********************************************************************************************************************
+ *  GLOBAL DATA PROTOTYPES
+ *********************************************************************************************************************/
+
 
 /**********************************************************************************************************************
- *  END OF FILE: IntCtrl_Cfg.h
+ *  GLOBAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
+void Mcu_Init ( const Mcu_ConfigType* ConfigPtr); //initialize the Mcu
+Mcu_RawResetType Mcu_GetResetRawValue(void);
+void Mcu_PerformReset(void);
+Std_ReturnType Mcu_InitClock (Mcu_ClockType ClockSetting);
+Std_ReturnType Mcu_DistributePllClock(void);
+Mcu_PllStatusType Mcu_GetPllStatus(void);
+
+#endif  /*MCU_H*/
+
+/**********************************************************************************************************************
+ *  END OF FILE: Mcu.h
  *********************************************************************************************************************/

@@ -1,48 +1,73 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  IntCtrl_Cfg.h
+ *         File:  Mcu_Lcfg.c
  *       Module:  -
  *
- *  Description:  <Write File DESCRIPTION here>     
- *  
- *********************************************************************************************************************/
-#ifndef INTCTRL_CFG_H
-#define INTCTRL_CFG_H
-
-/**********************************************************************************************************************
- * INCLUDES
+ *  Description:  <Write File DESCRIPTION here>
+ *
  *********************************************************************************************************************/
 
-
 /**********************************************************************************************************************
- *  GLOBAL CONSTANT MACROS
+ *  INCLUDES
  *********************************************************************************************************************/
-#define ENABLE_GLOBAL_INTERRUPT				1
+#include "Std_Types.h"
+#include "Mcu_Types.h"
+#include "Mcu_cfg.h"
 
-/*"You can choose a number from 1, 2, 4, and 8"... 1 --> 1 GP_PRI and 8 SubGP_PRI, 2 --> 2 GP_PRI and 4 SubGP_PRI, 4 --> 4 GP_PRI and 2 SubGP_PRI, 8 --> 8 GP_PRI and 1 SubGP_PRI */
-/*X --> Group and Y --> SubGroup*/
-#define NUM_OF_GROUP_PRI_YYY					1		
-#define NUM_OF_GROUP_PRI_XYY					2		
-#define NUM_OF_GROUP_PRI_XXY					4		
-#define NUM_OF_GROUP_PRI_XXX					8
-#define NUM_OF_GROUP_PRI_SELECTOR			NUM_OF_GROUP_PRI_XXY	
 
-/*number of programmable exceptions from 1 to 85: 7 system exceptions and faults, 78 peripherals interrupts*/
-#define NUM_OF_ACTIVE_INTERRUPT 		6 
+
+Mcu_ClockSettingsCfgType Mcu_ClockSettingsCfg [NUM_OF_CLOCK_CONFIG_MODES] =
+{
+	{MOSC,		PLL_ENABLED , 	66},
+	{PIOSC,		PLL_ENABLED , 	120},
+	{MOSC,		PLL_DISABLED , 	80},
+	{PIOSC,		PLL_ENABLED , 	80},
+	{MOSC,		PLL_ENABLED , 	50},
+	{PIOSC, 	PLL_DISABLED,	16}
+};
+
+Mcu_ClockGatesCfgType Mcu_ClockGates[NUM_OF_ACTIVATED_PRIPHERALS] =
+{
+	Mcu_GPIO_A,
+	Mcu_TIMER5,
+	Mcu_UART4,
+	Mcu_HIB
+};
+
+
+const Mcu_ConfigType Mcu_ConfigTypeStruct =
+{
+	(Mcu_ClockSettingsCfgType*)		Mcu_ClockSettingsCfg,
+	(Mcu_ClockGatesCfgType*)		Mcu_ClockGates
+
+};
+
 /**********************************************************************************************************************
- *  GLOBAL FUNCTION MACROS
+ *  LOCAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  LOCAL FUNCTIONS
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
 
 
+/******************************************************************************
+* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
+* \Description     : Describe this service
+*
+* \Sync\Async      : Synchronous
+* \Reentrancy      : Non Reentrant
+* \Parameters (in) : parameterName   Parameter Description
+* \Parameters (out): None
+* \Return value:   : Std_ReturnType  E_OK
+*                                    E_NOT_OK
+*******************************************************************************/
+
 /**********************************************************************************************************************
- *  GLOBAL DATA TYPES AND STRUCTURES
- *********************************************************************************************************************/
-
-
- 
-#endif  /* INTCTRL_CFG_H */
-
-/**********************************************************************************************************************
- *  END OF FILE: IntCtrl_Cfg.h
+ *  END OF FILE: Mcu_Lcfg.c
  *********************************************************************************************************************/
